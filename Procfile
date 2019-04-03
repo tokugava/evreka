@@ -1,0 +1,1 @@
+web: gunicorn evreka.wsgi --log-file -

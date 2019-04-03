@@ -1,0 +1,16 @@
+test:
+  image: python:latest
+  script:
+  - pip install -r requirements/test.txt
+  - python manage.py migrate
+  - python manage.py test
+
+staging:
+  type: deploy
+  script:
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl
+  - dpl --provider=heroku --app=evreka --api-key=$HEROKU_STAGING_API_KEY
+  only:
+  - master
